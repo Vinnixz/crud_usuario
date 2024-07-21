@@ -1,0 +1,10 @@
+#Ignora arquivos de configuração do sistema
+*.env
+
+#Ignorar diretório de dependências
+node_modules/
+venv/
+
+# Ignorar diretórios de cache do Python
+__pycache__/
+*.py[cod]
