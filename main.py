@@ -1,3 +1,7 @@
+"""
+Módulo principal
+"""
+
 from api.app import app
 import api.router
 from core.logs.logger import setup_logger
