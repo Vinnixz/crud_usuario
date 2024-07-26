@@ -3,36 +3,38 @@ Este módulo fornece funções para criar uma conexão com um banco de dados SQL
 e criar uma tabela de usuários.
 """
 import sqlite3
+from core.logs.logger import setup_logger
 
+logger = setup_logger(__name__)
 
 def create_connection():
     "Cria a conexão do banco"
     connection = None
     try:
-        connection = sqlite3.connect("meuapp.db")
-        print("Connection to SQLite DB successful")
+        connection = sqlite3.connect("crud.db")
+        logger.info("Conexão com a tabela criada com sucesso")
     except sqlite3.Error as database_error:
-        print(f"The error '{database_error}' occurred")
+        logger.info("O erro '%s' ocorreu", database_error)
     return connection
 
 
 def create_table(connection):
     "Cria uma tabela com id, nome, email e senha do usuário"
     query = """
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS user (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
-        email TEXT NOT NULL UNIQUE
+        password TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
     );
     """
     try:
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
-        print("Table created successfully")
+        logger.info("Tabela 'user' criada com sucesso")
     except sqlite3.Error as database_error:
-        print(f"The error '{database_error}' occurred")
+        logger.info("O erro '%s' ocorreu", database_error)
 
 
 def main():
