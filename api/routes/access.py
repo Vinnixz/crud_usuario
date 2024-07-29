@@ -45,3 +45,5 @@ def register():
     if status_code == 201:
         return redirect(url_for("access.show_success_register"))
     return jsonify(response), 400
+
+
